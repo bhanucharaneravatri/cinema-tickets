@@ -1,9 +1,0 @@
-uk/gov/dwp/uc/pairtest/domain/TicketTypeRequest.class
-thirdparty/seatbooking/SeatReservationServiceImpl.class
-uk/gov/dwp/uc/pairtest/TicketServiceImpl.class
-thirdparty/seatbooking/SeatReservationService.class
-uk/gov/dwp/uc/pairtest/domain/TicketTypeRequest$Type.class
-thirdparty/paymentgateway/TicketPaymentServiceImpl.class
-thirdparty/paymentgateway/TicketPaymentService.class
-uk/gov/dwp/uc/pairtest/TicketService.class
-uk/gov/dwp/uc/pairtest/exception/InvalidPurchaseException.class
