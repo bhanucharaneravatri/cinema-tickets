@@ -43,7 +43,7 @@ public class TicketServiceImpl implements TicketService {
         //if not throwing exception with a valid message
         if(totalTickets>20)
             throw new InvalidPurchaseException("You can only purchase 20 tickets at a time");
-        //making payment using thirdpart service   
+        //making payment using thirdparty service   
         ticketPaymentService.makePayment(accountId, totalCost);
         //making reservation assuming payment is successful
         seatReservationService.reserveSeat(accountId, noOfSeats);
