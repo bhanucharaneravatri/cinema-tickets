@@ -32,17 +32,23 @@ public class TicketServiceImpl implements TicketService {
             throws InvalidPurchaseException {
         
         boolean adultBooked = false;
+        //As per Instructions Child and Infant tickets cannot be purchased without purchasing an Adult ticket.
+        //so checking if atleast one adult ticket request is there if not throwing exception with a valid message
         adultBooked = isAdultBooked(ticketTypeRequests);
         if(!adultBooked)
             throw new InvalidPurchaseException("An adult must be present with child and infants");
-
+        //calculating number of total requested tickets , seats required and total cost
         calculateSeatsCostAndTickets(ticketTypeRequests);
+        //As per Instructions Only a maximum of 20 tickets that can be purchased at a time
+        //if not throwing exception with a valid message
         if(totalTickets>20)
             throw new InvalidPurchaseException("You can only purchase 20 tickets at a time");
-            
+        //making payment using thirdpart service   
         ticketPaymentService.makePayment(accountId, totalCost);
+        //making reservation assuming payment is successful
         seatReservationService.reserveSeat(accountId, noOfSeats);
     }
+    
     private void calculateSeatsCostAndTickets(TicketTypeRequest... ticketTypeRequests) {
         Arrays.stream(ticketTypeRequests).forEach(
                 ticketTypeRequest -> {
