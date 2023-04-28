@@ -17,26 +17,27 @@ import uk.gov.dwp.uc.pairtest.exception.InvalidPurchaseException;
 
 public class TicketServiceImplTest {
     TicketService ticketService = new TicketServiceImpl();
-    TicketTypeRequest[] ticketTypeRequests = { new TicketTypeRequest(Type.CHILD, 1),
+    long accountId = 112345678L;
+    TicketTypeRequest[] ticketTypeRequests1 = { new TicketTypeRequest(Type.CHILD, 1),
             new TicketTypeRequest(Type.INFANT, 1) };
 
     @Test(expected = InvalidPurchaseException.class)
-    public void testTicketBooking() {
-        ticketService.purchaseTickets((long) 112345678, ticketTypeRequests);
+    public void exceptionTesting1() {
+        ticketService.purchaseTickets(accountId, ticketTypeRequests1);
     }
 
     TicketTypeRequest[] ticketTypeRequests2 = { new TicketTypeRequest(Type.CHILD, 1) };
 
     @Test(expected = InvalidPurchaseException.class)
-    public void test2TicketBooking() {
-        ticketService.purchaseTickets((long) 112345678, ticketTypeRequests2);
+    public void exceptionTesting2() {
+        ticketService.purchaseTickets(accountId , ticketTypeRequests2);
     }
 
     TicketTypeRequest[] ticketTypeRequests3 = { new TicketTypeRequest(Type.INFANT, 1) };
 
     @Test(expected = InvalidPurchaseException.class)
-    public void test3TicketBooking() {
-        ticketService.purchaseTickets((long) 112345678, ticketTypeRequests3);
+    public void exceptionTesting3() {
+        ticketService.purchaseTickets(accountId, ticketTypeRequests3);
     }
 
     TicketTypeRequest[] ticketTypeRequests4 = { new TicketTypeRequest(Type.INFANT, 1) };
@@ -47,7 +48,7 @@ public class TicketServiceImplTest {
     public void whenExceptionThrown_correctErrorIsDisplayed() {
         exceptionRule.expect(InvalidPurchaseException.class);
         exceptionRule.expectMessage("An adult must be present with child and infants");
-        ticketService.purchaseTickets((long) 112345678, ticketTypeRequests4);
+        ticketService.purchaseTickets(accountId, ticketTypeRequests4);
     }
 
     TicketTypeRequest[] ticketTypeRequests5 = { new TicketTypeRequest(Type.ADULT, 25) };
@@ -58,12 +59,12 @@ public class TicketServiceImplTest {
     public void whenExceptionThrown_correctErrorIsDisplayed2() {
         exceptionRule.expect(InvalidPurchaseException.class);
         exceptionRule.expectMessage("You can only purchase 20 tickets at a time");
-        ticketService.purchaseTickets((long) 112345678, ticketTypeRequests5);
+        ticketService.purchaseTickets(accountId, ticketTypeRequests5);
     }
 
     TicketPaymentService ticketPaymentService = mock(TicketPaymentService.class);
     SeatReservationService seatReservationService = mock(SeatReservationService.class);
-    long accountId = 112345678L;
+    
     int totalCost = 200;
     int noOfSeats = 10;
     TicketTypeRequest[] ticketTypeRequests6 = { new TicketTypeRequest(Type.ADULT, 10) };
