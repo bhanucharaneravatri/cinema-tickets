@@ -27,6 +27,11 @@ replay_pid*
 #maven files
 *.lst
 
+
+.classpath
+.project
+.settings/
+target/
 ## target folder at the top level of the project structue and paths and contents underneath it
 
 target/
